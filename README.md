@@ -6,6 +6,10 @@
 - Mã sinh viên: B23DCCN821
 - Lớp: D23CNPM04
 
+- Họ và tên: Phạm Đức Của
+- Mã sinh viên: B23DCCN104
+- Lớp: D23CNPM04
+
 ## Môi trường và cài đặt
 
 Đã kiểm thử trên Windows với Python 3.12.7 và `aiocoap 0.4.17`.
