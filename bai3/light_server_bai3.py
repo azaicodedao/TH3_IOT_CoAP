@@ -3,6 +3,7 @@ Bai 3 - Smart Light CoAP Server (light01)
 Tai nguyen: coap://localhost:5683/iot/lab/light01/status
 Ho tro: GET, PUT, Observe
 """
+import argparse
 import asyncio
 import json
 from datetime import datetime
@@ -86,7 +87,7 @@ class LightStatusResource(resource.ObservableResource):
         return aiocoap.Message(code=Code.CHANGED, payload=text.encode("utf-8"))
 
 
-async def main():
+async def main(host="127.0.0.1", port=PORT):
     root = resource.Site()
     root.add_resource(
         [".well-known", "core"],
@@ -94,14 +95,22 @@ async def main():
     )
     root.add_resource(["iot", "lab", "light01", "status"], LightStatusResource())
 
-    await aiocoap.Context.create_server_context(root, bind=("127.0.0.1", PORT))
-    print("CoAP Smart Light Server started...")
+    ctx = await aiocoap.Context.create_server_context(
+        root, bind=(host, port), transports=["simplesocketserver"])
+    print(f"CoAP Smart Light Server started on {host}:{port}", flush=True)
     print("Resource: /iot/lab/light01/status")
-    await asyncio.get_running_loop().create_future()  # chay mai cho den khi Ctrl+C
+    try:
+        await asyncio.get_running_loop().create_future()  # cho den khi Ctrl+C
+    finally:
+        await ctx.shutdown()
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=PORT)
+    args = parser.parse_args()
     try:
-        asyncio.run(main())
+        asyncio.run(main(args.host, args.port))
     except KeyboardInterrupt:
         print("\nServer stopped.")

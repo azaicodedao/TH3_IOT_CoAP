@@ -1,0 +1,171 @@
+Environment: Windows, Python 3.12.7, aiocoap 0.4.17
+Command: python -m unittest discover -s tests -v
+
+test_bai1_get_post_errors_and_client (test_coap_lab.CoAPLabTests.test_bai1_get_post_errors_and_client) ... ok
+test_bai2_updates_monitor_and_alerts (test_coap_lab.CoAPLabTests.test_bai2_updates_monitor_and_alerts) ... ok
+test_bai3_controller_and_multiple_observers (test_coap_lab.CoAPLabTests.test_bai3_controller_and_multiple_observers) ... ok
+test_client_without_server (test_coap_lab.CoAPLabTests.test_client_without_server) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 18.055s
+
+OK
+CoAP Server started on 127.0.0.1:56830
+GET request received: /iot/lab/message
+GET request received: /iot/lab/message
+POST request received:
+Payload: Xin chao tu CoAP Client - B23DCCN821 - Nguyen Van Tien
+Time: 00:42:40
+Sending GET request...
+URI: coap://127.0.0.1:56830/iot/lab/message
+Response:
+Code: 2.05 Content
+Payload: Xin chao tu CoAP Server
+
+Sending POST request...
+URI: coap://127.0.0.1:56830/iot/lab/message
+Payload: Xin chao tu CoAP Client - B23DCCN821 - Nguyen Van Tien
+Response:
+Code: 2.04 Changed
+Payload: Server da nhan thong diep
+
+
+GET request received: /iot/lab/message
+Sending GET request...
+URI: coap://127.0.0.1:56830/missing
+Response:
+Code: 4.04 Not Found
+Payload: 
+
+Sending POST request...
+URI: coap://127.0.0.1:56830/missing
+Payload: Xin chao tu CoAP Client - B23DCCN821 - Nguyen Van Tien
+Response:
+Code: 4.04 Not Found
+Payload: 
+
+
+Sensor updated: {"device_id": "sensor01", "temperature": 34.3, "humidity": 79.0}
+Sensor CoAP Server started on 127.0.0.1:56830
+GET request received: /iot/lab/sensor01/data
+Sensor JSON: {'device_id': 'sensor01', 'temperature': 34.3, 'humidity': 79.0}
+Sensor updated: {"device_id": "sensor01", "temperature": 36.5, "humidity": 46.1}
+GET request received: /iot/lab/sensor01/data
+Sensor JSON: {'device_id': 'sensor01', 'temperature': 36.5, 'humidity': 46.1}
+Sensor updated: {"device_id": "sensor01", "temperature": 35.6, "humidity": 55.1}
+GET request received: /iot/lab/sensor01/data
+[00:42:49] Received sensor data
+Device: sensor01
+Temperature: 35.6 C
+Humidity: 55.1 %
+CANH BAO: Nhiet do cao
+
+------------------------------
+
+Sensor updated: {"device_id": "sensor01", "temperature": 24.1, "humidity": 77.6}
+GET request received: /iot/lab/sensor01/data
+[00:42:52] Received sensor data
+Device: sensor01
+Temperature: 24.1 C
+Humidity: 77.6 %
+Trang thai: Binh thuong
+
+------------------------------
+[00:42:52] Received sensor data
+Device: sensor01
+Temperature: 36.1 C
+Humidity: 38.7 %
+CANH BAO: Nhiet do cao
+CANH BAO: Do am thap
+
+------------------------------
+
+
+[00:42:52] Received sensor data
+Device: sensor01
+Temperature: 35 C
+Humidity: 40 %
+Trang thai: Binh thuong
+
+------------------------------
+
+
+CoAP Smart Light Server started on 127.0.0.1:56830
+Resource: /iot/lab/light01/status
+[00:42:52] New Observe registration received (tong so observer: 1)
+[00:42:52] New Observe registration received (tong so observer: 2)
+Registering CoAP Observe...
+[00:42:53] New Observe registration received (tong so observer: 3)
+Observe registration successful
+
+[00:42:53] Initial State
+Device: light01
+Status: OFF
+[00:42:54] PUT request received:
+Device: light01
+Command: ON
+Light state changed: OFF -> ON
+Notify observers: ON
+[00:42:54] GET request received: /iot/lab/light01/status
+Nhap lenh (ON/OFF/STATUS/EXIT): Lenh khong hop le! Chi chap nhan ON, OFF, STATUS hoac EXIT.
+Nhap lenh (ON/OFF/STATUS/EXIT): Sending PUT request...
+Response Code: 2.04 Changed
+Da bat den light01
+
+Nhap lenh (ON/OFF/STATUS/EXIT): Sending GET request...
+Response Code: 2.05 Content
+Response:
+{"device_id": "light01", "status": "ON"}
+
+Nhap lenh (ON/OFF/STATUS/EXIT): Controller ket thuc.
+
+
+[00:42:54] State Updated
+Device: light01
+Status: ON
+[00:42:54] PUT request received:
+Device: light01
+Command: OFF
+Light state changed: ON -> OFF
+Notify observers: OFF
+[00:42:54] GET request received: /iot/lab/light01/status
+Nhap lenh (ON/OFF/STATUS/EXIT): Lenh khong hop le! Chi chap nhan ON, OFF, STATUS hoac EXIT.
+Nhap lenh (ON/OFF/STATUS/EXIT): Sending PUT request...
+Response Code: 2.04 Changed
+Da tat den light01
+
+Nhap lenh (ON/OFF/STATUS/EXIT): Sending GET request...
+Response Code: 2.05 Content
+Response:
+{"device_id": "light01", "status": "OFF"}
+
+Nhap lenh (ON/OFF/STATUS/EXIT): Controller ket thuc.
+
+
+[00:42:54] State Updated
+Device: light01
+Status: OFF
+[00:42:55] PUT request received:
+Device: light01
+Command: OFF
+Light state unchanged: OFF
+PASS: 2 observers received ON/OFF; unchanged OFF sent no notification
+[00:42:55] PUT request received:
+Payload khong hop le
+[00:42:55] PUT request received:
+Payload khong hop le
+[00:42:55] PUT request received:
+Device: light01
+Command: BAD
+Lenh khong hop le
+[00:42:55] PUT request received:
+Device: other
+Command: ON
+Sending GET request...
+URI: coap://127.0.0.1:56831/iot/lab/message
+Loi ket noi/timeout: NetworkError: Network error: NetworkError
+Sending POST request...
+URI: coap://127.0.0.1:56831/iot/lab/message
+Payload: Xin chao tu CoAP Client - B23DCCN821 - Nguyen Van Tien
+Loi ket noi/timeout: TimeoutError: 
+
