@@ -10,6 +10,10 @@
 - Mã sinh viên: B23DCCN104
 - Lớp: D23CNPM04
 
+- Họ và tên : Đặng Quang Chiến
+- Mã sinh viên : B23DCCN092
+- Lớp : D23CNPM04
+
 ## Môi trường và cài đặt
 
 Đã kiểm thử trên Windows với Python 3.12.7 và `aiocoap 0.4.17`.
